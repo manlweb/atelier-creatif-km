@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Cumple Heidi 💖</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* 🌈 Fondo */
+body {
+    background: linear-gradient(-45deg, #ff4da6, #b266ff, #66ffcc, #ffcc66);
+    background-size: 400% 400%;
+    animation: fondo 10s ease infinite;
+}
+
+@keyframes fondo {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* 🎬 OVERLAY */
+#overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 2.5s ease;
+}
+
+/* 🎬 INTRO */
+#entrada {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+    text-align: center;
+    padding: 20px;
+}
+
+#entrada h1 {
+    font-size: 28px;
+}
+
+/* 👇 CRÉDITOS GRANDES (igual que el texto principal del intro) */
+.creditos-intro {
+    font-size: 28px;
+    margin-top: 25px;
+    line-height: 1.4;
+}
+
+/* CONTENIDO */
+.contenido {
+    position: relative;
+    z-index: 2;
+}
+
+/* TITULO */
+h1 {
+    text-align: center;
+    font-size: 42px;
+    margin-top: 80px;
+    padding: 0 10px;
+}
+
+/* TARJETAS */
+.card {
+    width: 90%;
+    max-width: 520px;
+    margin: 20px auto;
+    background: rgba(0,0,0,0.35);
+    padding: 15px;
+    border-radius: 20px;
+}
+
+img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+/* 🎬 BOTÓN FIJO ABAJO */
+.btn-video {
+    position: fixed;
+    bottom: 5px; /* 👈 más abajo */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 22px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 5;
+}
+
+/* VIDEO */
+video {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+}
+
+/* 💌 MENSAJE ARRIBA (YA NO ESTORBA) */
+#secreto {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 90%;
+    padding: 12px 18px;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 10;
+
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffd700;
+
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+
+    opacity: 0;
+}
+
+/* 🎬 CIERRE */
+#cierre {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 999;
+    font-size: 28px;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+/* 🎆 CANVAS */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 📱 CELULAR */
+@media (max-width: 600px) {
+
+.btn-video {
+    bottom: 10px; /* 👈 ajuste fino en móvil */
+}
+
+    h1 { font-size: 34px; margin-top: 60px; }
+
+    p { font-size: 20px; line-height: 1.7; }
+
+    #secreto { font-size: 24px; }
+
+    .creditos-intro { font-size: 24px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="overlay"></div>
+
+<!-- 🎬 INTRO -->
+<div id="entrada">
+    <h1>🎁 Estás a punto de ver algo especial...</h1>
+
+    <button onclick="abrir()">Reproducir</button>
+
+    <div class="creditos-intro">
+        <p>Dirigido a: Heidi 💖</p>
+        <p>Producción: Un momento especial</p>
+        <p>Mensaje: Amor, gratitud y vida 🌙</p>
+    </div>
+</div>
+
+<div class="contenido">
+
+<h1>🎉 Feliz Cumpleaños Heidi 🎉</h1>
+
+<audio id="musica">
+    <source src="mañanitas.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="sonidoInicio">
+    <source src="intro.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <img src="imagen1.jpg">
+    <p>
+    Hoy celebro tu vida, pero también la persona increíble que eres.<br>
+    No es solo lo hermosa que te ves… es la luz que tienes.<br>
+    Eres de esas personas que no se repiten en la vida 💖
+    </p>
+</div>
+
+<div class="card">
+    <img src="imagen2.jpg">
+    <p>
+    Aquí estamos, compartiendo momentos que valen más que cualquier cosa.<br>
+    Gracias por ser parte de mi vida y de la de mi hijo.<br>
+    Eres familia, eres hogar 🌙✨
+    </p>
+</div>
+
+<div class="card">
+    <img src="imagen3.jpg">
+    <p>
+    No siempre digo todo lo que siento…<br>
+    pero hoy quiero que lo sepas claro:<br>
+    Te amo, me siento orgulloso de ti y agradezco tenerte en mi vida 💜🎂
+    </p>
+</div>
+
+</div>
+
+<!-- BOTÓN -->
+<button class="btn-video" onclick="verVideo()">🎬 Ver video especial</button>
+
+<video id="miVideo" controls style="display:none;">
+    <source src="video.mp4" type="video/mp4">
+</video>
+
+<div id="secreto"></div>
+
+<div id="cierre">
+    <p>
+    Gracias por existir en mi vida…<br><br>
+    Hoy no solo cumples años,<br>
+    hoy celebramos todo lo que eres.<br><br>
+    <strong>Te amo. Feliz cumpleaños 💖</strong>
+    </p>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+const texto = "💌 Siempre vas a ser importante para mí 💖";
+let i = 0;
+
+function escribir() {
+    const el = document.getElementById("secreto");
+    el.style.opacity = 1;
+
+    if (i < texto.length) {
+        el.innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 40);
+    }
+}
+
+/* 🎆 CANVAS */
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function Particle() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height;
+    this.speed = Math.random() * 4 + 1;
+    this.size = Math.random() * 3 + 1;
+    this.color = `hsl(${Math.random() * 60 + 200},100%,75%)`;
+}
+
+Particle.prototype.update = function() {
+    this.y -= this.speed;
+};
+
+Particle.prototype.draw = function() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+};
+
+function loop() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    if (Math.random() < 0.3) {
+        particles.push(new Particle());
+    }
+
+    particles.forEach((p, i) => {
+        p.update();
+        p.draw();
+        if (p.y < 0) particles.splice(i,1);
+    });
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+
+/* 🎬 ABRIR */
+function abrir() {
+    const entrada = document.getElementById("entrada");
+    const overlay = document.getElementById("overlay");
+
+    document.getElementById("sonidoInicio").play();
+
+    setTimeout(() => { overlay.style.opacity = "0.6"; }, 300);
+    setTimeout(() => { entrada.style.opacity = "0"; }, 1200);
+
+    setTimeout(() => {
+        entrada.style.display = "none";
+        document.getElementById("musica").play();
+    }, 2000);
+
+    setTimeout(() => { overlay.style.opacity = "0"; }, 3500);
+
+    setTimeout(() => { escribir(); }, 6000);
+}
+
+/* 🎥 VIDEO */
+function verVideo() {
+    document.getElementById("musica").pause();
+
+    const video = document.getElementById("miVideo");
+    video.style.display = "block";
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+
+    video.play();
+
+    video.onended = () => {
+        const cierre = document.getElementById("cierre");
+        cierre.style.display = "flex";
+        setTimeout(() => cierre.style.opacity = "1", 200);
+    };
+}
+</script>
+
+</body>
+</html>
