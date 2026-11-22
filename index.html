@@ -231,7 +231,7 @@ footer {
 .modal-card {
     position: relative;
     width: 100%;
-    max-width: 480px;
+    max-width: 490px;
     background: var(--surface);
     color: var(--ink);
     border-radius: 16px;
@@ -327,12 +327,13 @@ footer {
 
 .modal-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
 }
 
 .modal-actions .btn {
-    flex: 1;
+    flex: 1 1 180px;
     margin: 0;
     text-align: center;
     padding: 13px 16px;
@@ -523,6 +524,9 @@ footer {
       <a id="sendWhatsAppLink" href="https://api.whatsapp.com/send?phone=5217228970604" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
         Enviar a WhatsApp
       </a>
+      <a id="sendEmailLink" href="mailto:ateliercreatifkm@gmail.com" class="btn">
+        Enviar por correo
+      </a>
     </div>
   </div>
 </div>
@@ -543,6 +547,7 @@ footer {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   var WHATSAPP_PHONE = "5217228970604";
+  var CONTACT_EMAIL = "ateliercreatifkm@gmail.com";
 
   var orderState = {
     product: "Playera",
@@ -554,10 +559,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var orderModal = document.getElementById("orderModal");
   var previewModal = document.getElementById("previewModal");
   var sendWhatsAppLink = document.getElementById("sendWhatsAppLink");
+  var sendEmailLink = document.getElementById("sendEmailLink");
   var targetDateInput = document.getElementById("targetDate");
   var extraNotesInput = document.getElementById("extraNotes");
 
-  function updateWhatsAppUrl() {
+  function buildSummaryLines() {
     var dateVal = (targetDateInput.value || "").trim() || "Por definir";
     var notesVal = (extraNotesInput.value || "").trim();
 
@@ -576,11 +582,33 @@ document.addEventListener("DOMContentLoaded", function () {
       lines.push("• Detalles: " + notesVal);
     }
 
+    return lines;
+  }
+
+  function updateContactLinks() {
+    var lines = buildSummaryLines();
+    var bodyText = lines.join("\n");
+
     sendWhatsAppLink.href =
       "https://api.whatsapp.com/send?phone=" +
       WHATSAPP_PHONE +
       "&text=" +
-      encodeURIComponent(lines.join("\n"));
+      encodeURIComponent(bodyText);
+
+    var subjectText =
+      "(Sitio web) Cotización: " +
+      orderState.product +
+      " (" +
+      orderState.quantity +
+      ")";
+
+    sendEmailLink.href =
+      "mailto:" +
+      CONTACT_EMAIL +
+      "?subject=" +
+      encodeURIComponent(subjectText) +
+      "&body=" +
+      encodeURIComponent(bodyText);
   }
 
   function setupChipGroup(containerId, stateKey) {
@@ -594,7 +622,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       chip.classList.add("is-selected");
       orderState[stateKey] = chip.getAttribute("data-value");
-      updateWhatsAppUrl();
+      updateContactLinks();
     });
   }
 
@@ -618,8 +646,8 @@ document.addEventListener("DOMContentLoaded", function () {
   setupChipGroup("ideaChips", "ideaType");
   setupChipGroup("qtyChips", "quantity");
 
-  targetDateInput.addEventListener("input", updateWhatsAppUrl);
-  extraNotesInput.addEventListener("input", updateWhatsAppUrl);
+  targetDateInput.addEventListener("input", updateContactLinks);
+  extraNotesInput.addEventListener("input", updateContactLinks);
 
   function openOrderModal(prefill) {
     var data = prefill || {};
@@ -630,7 +658,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof data.notes === "string") {
       extraNotesInput.value = data.notes;
     }
-    updateWhatsAppUrl();
+    updateContactLinks();
     orderModal.classList.add("is-open");
     orderModal.setAttribute("aria-hidden", "false");
   }
@@ -648,8 +676,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("closeOrderBtn").addEventListener("click", closeOrderModal);
+
   sendWhatsAppLink.addEventListener("click", function () {
-    updateWhatsAppUrl();
+    updateContactLinks();
+    setTimeout(closeOrderModal, 200);
+  });
+
+  sendEmailLink.addEventListener("click", function () {
+    updateContactLinks();
     setTimeout(closeOrderModal, 200);
   });
 
@@ -718,7 +752,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  updateWhatsAppUrl();
+  updateContactLinks();
 });
 </script>
 
