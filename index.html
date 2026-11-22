@@ -325,6 +325,22 @@ footer {
     resize: vertical;
 }
 
+.copy-notice {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f5efe6;
+    border: 1px solid var(--gold);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink);
+}
+
+.copy-notice.is-visible {
+    display: block;
+}
+
 .modal-actions {
     display: flex;
     flex-wrap: wrap;
@@ -520,6 +536,10 @@ footer {
       <textarea id="extraNotes" class="modal-textarea" placeholder="Ej. Temática navideña, nombre, frase, colores o estilo que buscas..."></textarea>
     </div>
 
+    <div class="copy-notice" id="emailCopyNotice">
+      Resumen copiado al portapapeles. Si tu correo no rellena el mensaje automáticamente, pégalo con Ctrl + V (o Cmd + V).
+    </div>
+
     <div class="modal-actions">
       <a id="sendWhatsAppLink" href="https://api.whatsapp.com/send?phone=5217228970604" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
         Enviar a WhatsApp
@@ -562,6 +582,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var sendEmailLink = document.getElementById("sendEmailLink");
   var targetDateInput = document.getElementById("targetDate");
   var extraNotesInput = document.getElementById("extraNotes");
+  var emailCopyNotice = document.getElementById("emailCopyNotice");
 
   function buildSummaryLines() {
     var dateVal = (targetDateInput.value || "").trim() || "Por definir";
@@ -569,20 +590,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var lines = [
       "(sitio web) Hola, me gustaría cotizar / hacer un pedido:",
-      "• Producto: " + orderState.product,
-      "• Tipo de solicitud: " + orderState.ideaType,
-      "• Cantidad: " + orderState.quantity,
-      "• Fecha deseada: " + dateVal
+      "- Producto: " + orderState.product,
+      "- Tipo de solicitud: " + orderState.ideaType,
+      "- Cantidad: " + orderState.quantity,
+      "- Fecha deseada: " + dateVal
     ];
 
     if (orderState.reference) {
-      lines.push("• Referencia de galería: " + orderState.reference);
+      lines.push("- Referencia de galería: " + orderState.reference);
     }
     if (notesVal) {
-      lines.push("• Detalles: " + notesVal);
+      lines.push("- Detalles: " + notesVal);
     }
 
     return lines;
+  }
+
+  function buildUniversalEmailText() {
+    var lines = buildSummaryLines();
+    var subjectText =
+      "Cotizacion sitio web - " +
+      orderState.product +
+      " (" +
+      orderState.quantity +
+      ")";
+
+    return (
+      "Para: " +
+      CONTACT_EMAIL +
+      "\n" +
+      "Asunto: " +
+      subjectText +
+      "\n\n" +
+      lines.join("\n")
+    );
   }
 
   function updateContactLinks() {
@@ -596,7 +637,7 @@ document.addEventListener("DOMContentLoaded", function () {
       encodeURIComponent(bodyText);
 
     var subjectText =
-      "(Sitio web) Cotización: " +
+      "Cotizacion sitio web - " +
       orderState.product +
       " (" +
       orderState.quantity +
@@ -609,6 +650,33 @@ document.addEventListener("DOMContentLoaded", function () {
       encodeURIComponent(subjectText) +
       "&body=" +
       encodeURIComponent(bodyText);
+  }
+
+  function copyTextToClipboard(text, callback) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        if (callback) callback();
+      }).catch(function () {
+        fallbackExecCopy(text, callback);
+      });
+    } else {
+      fallbackExecCopy(text, callback);
+    }
+  }
+
+  function fallbackExecCopy(text, callback) {
+    var helper = document.createElement("textarea");
+    helper.value = text;
+    helper.setAttribute("readonly", "");
+    helper.style.position = "fixed";
+    helper.style.opacity = "0";
+    document.body.appendChild(helper);
+    helper.select();
+    try {
+      document.execCommand("copy");
+    } catch (e) {}
+    document.body.removeChild(helper);
+    if (callback) callback();
   }
 
   function setupChipGroup(containerId, stateKey) {
@@ -658,6 +726,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof data.notes === "string") {
       extraNotesInput.value = data.notes;
     }
+    emailCopyNotice.classList.remove("is-visible");
     updateContactLinks();
     orderModal.classList.add("is-open");
     orderModal.setAttribute("aria-hidden", "false");
@@ -684,7 +753,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   sendEmailLink.addEventListener("click", function () {
     updateContactLinks();
-    setTimeout(closeOrderModal, 200);
+    copyTextToClipboard(buildUniversalEmailText(), function () {
+      emailCopyNotice.classList.add("is-visible");
+    });
   });
 
   /* VISTA PREVIA DE GALERÍA */
