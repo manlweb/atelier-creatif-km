@@ -119,15 +119,15 @@ body {
 /* CATEGORÍA */
 .category-title {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    margin: 38px 0 16px;
+    font-size: 21px;
+    margin: 42px 0 18px;
     color: var(--ink);
 }
 
 /* GALERÍA */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto 36px;
@@ -149,7 +149,7 @@ body {
 .item img {
     display: block;
     width: 100%;
-    height: 260px;
+    height: 250px;
     object-fit: contain;
     background: #eee;
     transition: transform 0.3s ease, filter 0.3s ease;
@@ -333,7 +333,7 @@ footer {
     resize: vertical;
 }
 
-.copy-notice {
+.copy-box {
     display: none;
     margin-top: 12px;
     padding: 10px 12px;
@@ -345,8 +345,21 @@ footer {
     color: var(--ink);
 }
 
-.copy-notice.is-visible {
+.copy-box.is-visible {
     display: block;
+}
+
+.copy-box textarea {
+    width: 100%;
+    margin-top: 8px;
+    min-height: 92px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--ink);
 }
 
 .modal-actions {
@@ -401,7 +414,7 @@ footer {
 <section class="section">
     <h2>Productos</h2>
     <p class="products-list">
-        Sudaderas · Playeras · Tazas · Termos · Velas · Accesorios Personalizados.
+        Sudaderas · Playeras · Tazas · Termos · Velas · Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)
     </p>
 </section>
 
@@ -409,44 +422,88 @@ footer {
 <section class="section" id="galeria">
     <h2>Galería</h2>
 
-    <div class="category-title">Películas</div>
+    <!-- SUDADERAS -->
+    <div class="category-title">Sudaderas</div>
     <div class="gallery">
-        <div class="item"><img src="playerayvaso.jpeg" alt="Diseño Películas - Playera y vaso" data-category="Películas" data-ref="Playera y vaso (Películas)"></div>
-        <div class="item"><img src="tazacalcetinaalmohadabettlejuice.jpeg" alt="Diseño Películas - Beetlejuice" data-category="Películas" data-ref="Set Beetlejuice (Películas)"></div>
-        <div class="item"><img src="playeraansiedad.jpeg" alt="Diseño Películas - Playera" data-category="Películas" data-ref="Playera temática (Películas)"></div>
+        <div class="item"><img src="Sud5.jpeg" alt="Sudaderas - Sud5" data-product="Sudaderas" data-ref="Sudaderas - Sud5"></div>
+        <div class="item"><img src="Sud7.jpeg" alt="Sudaderas - Sud7" data-product="Sudaderas" data-ref="Sudaderas - Sud7"></div>
+        <div class="item"><img src="Sud11.jpeg" alt="Sudaderas - Sud11" data-product="Sudaderas" data-ref="Sudaderas - Sud11"></div>
+        <div class="item"><img src="Sud12.jpeg" alt="Sudaderas - Sud12" data-product="Sudaderas" data-ref="Sudaderas - Sud12"></div>
+        <div class="item"><img src="Sud14.jpeg" alt="Sudaderas - Sud14" data-product="Sudaderas" data-ref="Sudaderas - Sud14"></div>
+        <div class="item"><img src="Sud15.jpeg" alt="Sudaderas - Sud15" data-product="Sudaderas" data-ref="Sudaderas - Sud15"></div>
+        <div class="item"><img src="Sud16.jpeg" alt="Sudaderas - Sud16" data-product="Sudaderas" data-ref="Sudaderas - Sud16"></div>
+        <div class="item"><img src="Sud17.jpeg" alt="Sudaderas - Sud17" data-product="Sudaderas" data-ref="Sudaderas - Sud17"></div>
+        <div class="item"><img src="Sud19.jpeg" alt="Sudaderas - Sud19" data-product="Sudaderas" data-ref="Sudaderas - Sud19"></div>
+        <div class="item"><img src="Sud20.jpeg" alt="Sudaderas - Sud20" data-product="Sudaderas" data-ref="Sudaderas - Sud20"></div>
     </div>
 
-    <div class="category-title">Deportes</div>
+    <!-- PLAYERAS -->
+    <div class="category-title">Playeras</div>
     <div class="gallery">
-        <div class="item"><img src="sudaderaDT.jpeg" alt="Diseño Deportes - Sudadera" data-category="Deportes" data-ref="Sudadera (Deportes)"></div>
+        <div class="item"><img src="Play1.jpeg" alt="Playeras - Play1" data-product="Playeras" data-ref="Playeras - Play1"></div>
+        <div class="item"><img src="Play2.jpeg" alt="Playeras - Play2" data-product="Playeras" data-ref="Playeras - Play2"></div>
+        <div class="item"><img src="Play3.jpeg" alt="Playeras - Play3" data-product="Playeras" data-ref="Playeras - Play3"></div>
+        <div class="item"><img src="Play4.jpeg" alt="Playeras - Play4" data-product="Playeras" data-ref="Playeras - Play4"></div>
+        <div class="item"><img src="Play5.jpeg" alt="Playeras - Play5" data-product="Playeras" data-ref="Playeras - Play5"></div>
+        <div class="item"><img src="Play6.jpeg" alt="Playeras - Play6" data-product="Playeras" data-ref="Playeras - Play6"></div>
+        <div class="item"><img src="Play7.jpeg" alt="Playeras - Play7" data-product="Playeras" data-ref="Playeras - Play7"></div>
+        <div class="item"><img src="Play8.jpeg" alt="Playeras - Play8" data-product="Playeras" data-ref="Playeras - Play8"></div>
+        <div class="item"><img src="Play9.jpeg" alt="Playeras - Play9" data-product="Playeras" data-ref="Playeras - Play9"></div>
+        <div class="item"><img src="Play10.jpeg" alt="Playeras - Play10" data-product="Playeras" data-ref="Playeras - Play10"></div>
     </div>
 
-    <div class="category-title">Navidad</div>
+    <!-- TAZAS -->
+    <div class="category-title">Tazas</div>
     <div class="gallery">
-        <div class="item"><img src="SudaderaMX.jpeg" alt="Diseño Navidad - Sudadera" data-category="Navidad" data-ref="Sudadera navideña (Navidad)"></div>
-        <div class="item"><img src="EvanShirt.jpeg" alt="Diseño Navidad - Playera" data-category="Navidad" data-ref="Playera navideña (Navidad)"></div>
-        <div class="item"><img src="sudaderamerry.jpeg" alt="Diseño Navidad - Sudadera" data-category="Navidad" data-ref="Sudadera Merry (Navidad)"></div>
+        <div class="item"><img src="Taz2.jpeg" alt="Tazas - Taz2" data-product="Tazas" data-ref="Tazas - Taz2"></div>
+        <div class="item"><img src="Taz3.jpeg" alt="Tazas - Taz3" data-product="Tazas" data-ref="Tazas - Taz3"></div>
+        <div class="item"><img src="Taz4.jpeg" alt="Tazas - Taz4" data-product="Tazas" data-ref="Tazas - Taz4"></div>
+        <div class="item"><img src="Taz5.jpeg" alt="Tazas - Taz5" data-product="Tazas" data-ref="Tazas - Taz5"></div>
+        <div class="item"><img src="Taz6.jpeg" alt="Tazas - Taz6" data-product="Tazas" data-ref="Tazas - Taz6"></div>
     </div>
 
-    <div class="category-title">Especiales</div>
+    <!-- TERMOS -->
+    <div class="category-title">Termos</div>
     <div class="gallery">
-        <div class="item"><img src="kitvino.jpeg" alt="Diseño Especiales - Kit de vino" data-category="Especiales" data-ref="Kit de vino (Especiales)"></div>
-        <div class="item"><img src="tazas.jpeg" alt="Diseño Especiales - Tazas" data-category="Especiales" data-ref="Tazas especiales (Especiales)"></div>
-        <div class="item"><img src="sudaderalv.jpeg" alt="Diseño Especiales - Sudadera" data-category="Especiales" data-ref="Sudadera especial (Especiales)"></div>
-        <div class="item"><img src="tazalove.jpeg" alt="Diseño Especiales - Taza" data-category="Especiales" data-ref="Taza Love (Especiales)"></div>
+        <div class="item"><img src="Ter1.jpeg" alt="Termos - Ter1" data-product="Termos" data-ref="Termos - Ter1"></div>
+        <div class="item"><img src="Ter2.jpeg" alt="Termos - Ter2" data-product="Termos" data-ref="Termos - Ter2"></div>
+        <div class="item"><img src="Ter3.jpeg" alt="Termos - Ter3" data-product="Termos" data-ref="Termos - Ter3"></div>
     </div>
 
-    <div class="category-title">Día de muertos</div>
+    <!-- VELAS -->
+    <div class="category-title">Velas</div>
     <div class="gallery">
-        <div class="item"><img src="diademuertos1.jpeg" alt="Diseño Día de muertos 1" data-category="Día de muertos" data-ref="Diseño Día de muertos 1"></div>
-        <div class="item"><img src="diademuertos2.jpeg" alt="Diseño Día de muertos 2" data-category="Día de muertos" data-ref="Diseño Día de muertos 2"></div>
+        <div class="item"><img src="Vela1 (1).jpeg" alt="Velas - Vela1 (1)" data-product="Velas" data-ref="Velas - Vela1 (1)"></div>
+        <div class="item"><img src="Vela1 (2).jpeg" alt="Velas - Vela1 (2)" data-product="Velas" data-ref="Velas - Vela1 (2)"></div>
+        <div class="item"><img src="Vela1 (3).jpeg" alt="Velas - Vela1 (3)" data-product="Velas" data-ref="Velas - Vela1 (3)"></div>
+        <div class="item"><img src="Vela1 (4).jpeg" alt="Velas - Vela1 (4)" data-product="Velas" data-ref="Velas - Vela1 (4)"></div>
+        <div class="item"><img src="Vela1 (5).jpeg" alt="Velas - Vela1 (5)" data-product="Velas" data-ref="Velas - Vela1 (5)"></div>
+        <div class="item"><img src="Vela1 (6).jpeg" alt="Velas - Vela1 (6)" data-product="Velas" data-ref="Velas - Vela1 (6)"></div>
+        <div class="item"><img src="Vela1 (7).jpeg" alt="Velas - Vela1 (7)" data-product="Velas" data-ref="Velas - Vela1 (7)"></div>
+        <div class="item"><img src="Vela1 (8).jpeg" alt="Velas - Vela1 (8)" data-product="Velas" data-ref="Velas - Vela1 (8)"></div>
+        <div class="item"><img src="Vela1 (9).jpeg" alt="Velas - Vela1 (9)" data-product="Velas" data-ref="Velas - Vela1 (9)"></div>
+        <div class="item"><img src="Vela1 (10).jpeg" alt="Velas - Vela1 (10)" data-product="Velas" data-ref="Velas - Vela1 (10)"></div>
+        <div class="item"><img src="Vela1 (11).jpeg" alt="Velas - Vela1 (11)" data-product="Velas" data-ref="Velas - Vela1 (11)"></div>
+        <div class="item"><img src="Vela1 (12).jpeg" alt="Velas - Vela1 (12)" data-product="Velas" data-ref="Velas - Vela1 (12)"></div>
+        <div class="item"><img src="Vela1 (13).jpeg" alt="Velas - Vela1 (13)" data-product="Velas" data-ref="Velas - Vela1 (13)"></div>
     </div>
 
-    <div class="category-title">Halloween</div>
+    <!-- ACCESORIOS PERSONALIZADOS -->
+    <div class="category-title">Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)</div>
     <div class="gallery">
-        <div class="item"><img src="halloween1.jpeg" alt="Diseño Halloween 1" data-category="Halloween" data-ref="Diseño Halloween 1"></div>
-        <div class="item"><img src="halloween2.jpeg" alt="Diseño Halloween 2" data-category="Halloween" data-ref="Diseño Halloween 2"></div>
-        <div class="item"><img src="halloween3.jpeg" alt="Diseño Halloween 3" data-category="Halloween" data-ref="Diseño Halloween 3"></div>
+        <div class="item"><img src="Acc1.jpeg" alt="Accesorios Personalizados - Acc1" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc1"></div>
+        <div class="item"><img src="Acc2.jpeg" alt="Accesorios Personalizados - Acc2" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc2"></div>
+        <div class="item"><img src="Acc3.jpeg" alt="Accesorios Personalizados - Acc3" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc3"></div>
+        <div class="item"><img src="Acc4.jpeg" alt="Accesorios Personalizados - Acc4" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc4"></div>
+        <div class="item"><img src="Acc5.jpeg" alt="Accesorios Personalizados - Acc5" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc5"></div>
+        <div class="item"><img src="Acc6.jpeg" alt="Accesorios Personalizados - Acc6" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc6"></div>
+        <div class="item"><img src="Acc7.jpeg" alt="Accesorios Personalizados - Acc7" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc7"></div>
+        <div class="item"><img src="Acc8.jpeg" alt="Accesorios Personalizados - Acc8" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc8"></div>
+        <div class="item"><img src="Acc9.jpeg" alt="Accesorios Personalizados - Acc9" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc9"></div>
+        <div class="item"><img src="Acc11.jpeg" alt="Accesorios Personalizados - Acc11" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc11"></div>
+        <div class="item"><img src="acc13.jpeg" alt="Accesorios Personalizados - acc13" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - acc13"></div>
+        <div class="item"><img src="Acc14.jpeg" alt="Accesorios Personalizados - Acc14" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc14"></div>
+        <div class="item"><img src="Acc16.jpeg" alt="Accesorios Personalizados - Acc16" data-product="Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)" data-ref="Accesorios Personalizados - Acc16"></div>
     </div>
 
     <button type="button" class="btn" data-open-order data-idea="Inspirado en la galería">
@@ -546,8 +603,9 @@ footer {
       <textarea id="extraNotes" class="modal-textarea" placeholder="Ej. Temática navideña, nombre, frase, aroma o estilo que buscas..."></textarea>
     </div>
 
-    <div class="copy-notice" id="emailCopyNotice">
-      Resumen copiado al portapapeles. Si tu correo no rellena el mensaje automáticamente, pégalo con Ctrl + V (o Cmd + V).
+    <div class="copy-box" id="emailCopyBox">
+      <strong>Resumen listo para tu correo:</strong> se intentó copiar automáticamente. Si tu correo no rellena los campos, copia y pega este texto:
+      <textarea id="emailFallbackText" readonly></textarea>
     </div>
 
     <div class="modal-actions">
@@ -592,7 +650,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var sendEmailLink = document.getElementById("sendEmailLink");
   var targetDateInput = document.getElementById("targetDate");
   var extraNotesInput = document.getElementById("extraNotes");
-  var emailCopyNotice = document.getElementById("emailCopyNotice");
+  var emailCopyBox = document.getElementById("emailCopyBox");
+  var emailFallbackText = document.getElementById("emailFallbackText");
 
   function buildSummaryLines() {
     var dateVal = (targetDateInput.value || "").trim() || "Por definir";
@@ -736,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof data.notes === "string") {
       extraNotesInput.value = data.notes;
     }
-    emailCopyNotice.classList.remove("is-visible");
+    emailCopyBox.classList.remove("is-visible");
     updateContactLinks();
     orderModal.classList.add("is-open");
     orderModal.setAttribute("aria-hidden", "false");
@@ -763,9 +822,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   sendEmailLink.addEventListener("click", function () {
     updateContactLinks();
-    copyTextToClipboard(buildUniversalEmailText(), function () {
-      emailCopyNotice.classList.add("is-visible");
-    });
+    var fullEmailText = buildUniversalEmailText();
+    emailFallbackText.value = fullEmailText;
+    emailCopyBox.classList.add("is-visible");
+    copyTextToClipboard(fullEmailText);
   });
 
   /* VISTA PREVIA DE GALERÍA */
@@ -778,13 +838,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".gallery .item img").forEach(function (img) {
     img.addEventListener("click", function () {
       var ref = img.getAttribute("data-ref") || img.alt || "Diseño de galería";
-      var cat = img.getAttribute("data-category") || "Galería";
+      var prod = img.getAttribute("data-product") || "Galería";
 
-      activeGalleryItem = { ref: ref, cat: cat };
+      activeGalleryItem = { ref: ref, prod: prod };
       previewImg.src = img.src;
       previewImg.alt = ref;
       previewTitle.textContent = ref;
-      previewCategory.textContent = "Categoría: " + cat;
+      previewCategory.textContent = "Producto: " + prod;
 
       previewModal.classList.add("is-open");
       previewModal.setAttribute("aria-hidden", "false");
@@ -802,17 +862,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var itemData = activeGalleryItem;
     closePreviewModal();
 
-    var guessedProduct = "Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)";
-    var lowerRef = ((itemData && itemData.ref) || "").toLowerCase();
-    if (lowerRef.indexOf("sudadera") !== -1) guessedProduct = "Sudaderas";
-    else if (lowerRef.indexOf("playera") !== -1) guessedProduct = "Playeras";
-    else if (lowerRef.indexOf("taza") !== -1) guessedProduct = "Tazas";
-    else if (lowerRef.indexOf("termo") !== -1) guessedProduct = "Termos";
-    else if (lowerRef.indexOf("vela") !== -1) guessedProduct = "Velas";
-    else if (lowerRef.indexOf("vaso") !== -1) guessedProduct = "Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)";
-
     openOrderModal({
-      product: guessedProduct,
+      product: (itemData && itemData.prod) || "Sudaderas",
       ideaType: "Inspirado en la galería",
       reference: (itemData && itemData.ref) || "",
       notes: itemData ? 'Me gustaría algo similar a "' + itemData.ref + '".' : ""
