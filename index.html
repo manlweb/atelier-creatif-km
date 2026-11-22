@@ -333,6 +333,17 @@ footer {
     resize: vertical;
 }
 
+.field-note {
+    margin: 8px 0 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f5efe6;
+    border-left: 3px solid var(--gold);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
 .copy-box {
     display: none;
     margin-top: 12px;
@@ -480,7 +491,7 @@ footer {
         <div class="item"><img src="Taz11.jpeg" alt="Tazas - Taz11" data-product="Tazas" data-ref="Tazas - Taz11"></div>
         <div class="item"><img src="Taz12.jpeg" alt="Tazas - Taz12" data-product="Tazas" data-ref="Tazas - Taz12"></div>
         <div class="item"><img src="Taz13.jpeg" alt="Tazas - Taz13" data-product="Tazas" data-ref="Tazas - Taz13"></div>
-        <div class="item"><img src="Taz14.jpeg" alt="Tazas - Taz14 data-product="Tazas" data-ref="Tazas - Taz14"></div>
+        <div class="item"><img src="Taz14.jpeg" alt="Tazas - Taz14" data-product="Tazas" data-ref="Tazas - Taz14"></div>
         <div class="item"><img src="Taz15.jpeg" alt="Tazas - Taz15" data-product="Tazas" data-ref="Tazas - Taz15"></div>
     </div>
 
@@ -548,7 +559,7 @@ footer {
 
         <button type="button" class="step" data-open-order data-idea="Idea desde cero">
             <h3>1. Envíanos tu idea</h3>
-            <p>Cuéntanos el diseño que buscas, producto, cantidad y fecha de entrega.</p>
+            <p>Cuéntanos el diseño que buscas o compártenos el tuyo, producto, cantidad y fecha de entrega.</p>
         </button>
 
         <button type="button" class="step" data-open-order data-idea="Quiero propuesta de diseño">
@@ -606,6 +617,7 @@ footer {
       <span class="field-label">2. ¿Cómo estás partiendo?</span>
       <div class="chip-grid" id="ideaChips">
         <button type="button" class="chip is-selected" data-value="Idea desde cero">Idea desde cero</button>
+        <button type="button" class="chip" data-value="Ya tengo mi diseño">Ya tengo mi diseño</button>
         <button type="button" class="chip" data-value="Inspirado en la galería">Inspirado en la galería</button>
         <button type="button" class="chip" data-value="Regalo / Ocasión especial">Regalo / Ocasión</button>
         <button type="button" class="chip" data-value="Evento / Empresa">Evento / Empresa</button>
@@ -630,6 +642,9 @@ footer {
     <div class="field-group">
       <label class="field-label" for="extraNotes">Cuéntanos tu idea o referencia</label>
       <textarea id="extraNotes" class="modal-textarea" placeholder="Ej. Temática navideña, nombre, frase, aroma o estilo que buscas..."></textarea>
+      <p class="field-note">
+        <strong>¿Ya tienes tu diseño?</strong> Compártenoslo adjuntándolo directamente en WhatsApp o correo al enviar este mensaje.
+      </p>
     </div>
 
     <div class="copy-box" id="emailCopyBox">
