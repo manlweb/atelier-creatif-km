@@ -442,4 +442,249 @@ footer {
             <p>Desarrollamos una propuesta personalizada acorde a tu idea.</p>
         </button>
 
-        <a class="step" href="https
+        <a class="step" href="https://api.whatsapp.com/send?phone=5217228970604&text=(sitio%20web)%20Hola%2C%20quiero%20aprobar%20un%20diseño">
+            <h3>3. Apruebas</h3>
+            <p>Te mostramos el diseño final para tu confirmación.</p>
+        </a>
+
+        <a class="step" href="https://api.whatsapp.com/send?phone=5217228970604&text=(sitio%20web)%20Hola%2C%20quiero%20información%20sobre%20producción%20y%20entrega">
+            <h3>4. Producción y entrega</h3>
+            <p>Confirmamos tiempos de entrega y solicitamos el 50% de anticipo.</p>
+        </a>
+
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section contact">
+    <h2>Contacto</h2>
+
+    <button type="button" class="btn" onclick="openOrderModal()">WhatsApp</button>
+    <a href="mailto:ateliercreatifkm@gmail.com?subject=(Sitio%20web)%20Consulta&body=Hola,%20quiero%20información" class="btn">Correo</a>
+    <a href="https://linktr.ee/ateliercreatifkm" class="btn">Más enlaces</a>
+
+</section>
+
+<footer>
+    © 2026 Atelier Creatif KM
+</footer>
+
+<!-- MODAL CONFIGURADOR DE PEDIDO -->
+<div class="modal-backdrop" id="orderModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <button type="button" class="modal-close" aria-label="Cerrar" onclick="closeOrderModal()">&times;</button>
+    <h3 id="orderModalTitle">Arma tu solicitud</h3>
+    <p class="modal-sub">Elige lo básico para darte una propuesta clara y a tiempo desde el primer mensaje.</p>
+
+    <div class="field-group">
+      <span class="field-label">1. ¿Qué producto te interesa?</span>
+      <div class="chip-grid" id="productChips">
+        <button type="button" class="chip is-selected" data-value="Playera">Playera</button>
+        <button type="button" class="chip" data-value="Sudadera">Sudadera</button>
+        <button type="button" class="chip" data-value="Taza / Vaso">Taza / Vaso</button>
+        <button type="button" class="chip" data-value="Gorra">Gorra</button>
+        <button type="button" class="chip" data-value="Kit / Accesorio">Kit / Accesorio</button>
+        <button type="button" class="chip" data-value="Por definir">Por definir</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">2. ¿Cómo estás partiendo?</span>
+      <div class="chip-grid" id="ideaChips">
+        <button type="button" class="chip is-selected" data-value="Idea desde cero">Idea desde cero</button>
+        <button type="button" class="chip" data-value="Inspirado en la galería">Inspirado en la galería</button>
+        <button type="button" class="chip" data-value="Regalo / Ocasión especial">Regalo / Ocasión</button>
+        <button type="button" class="chip" data-value="Evento / Empresa">Evento / Empresa</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <span class="field-label">3. Cantidad aproximada</span>
+      <div class="chip-grid" id="qtyChips">
+        <button type="button" class="chip is-selected" data-value="1 pieza">1 pieza</button>
+        <button type="button" class="chip" data-value="2 a 10 piezas">2 a 10 piezas</button>
+        <button type="button" class="chip" data-value="11 a 30 piezas">11 a 30 piezas</button>
+        <button type="button" class="chip" data-value="Mayoreo / 30+">Mayoreo / 30+</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="targetDate">4. Fecha deseada (opcional)</label>
+      <input type="text" id="targetDate" class="modal-input" placeholder="Ej. 15 de diciembre, fin de mes o sin prisa">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="extraNotes">Cuéntanos tu idea o referencia</label>
+      <textarea id="extraNotes" class="modal-textarea" placeholder="Ej. Temática navideña, nombre, frase, colores o estilo que buscas..."></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-primary" onclick="sendOrderToWhatsApp()">Enviar a WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VISTA PREVIA DE GALERÍA -->
+<div class="modal-backdrop" id="previewModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" aria-label="Cerrar" onclick="closePreviewModal()">&times;</button>
+    <img id="previewImg" src="" alt="" class="preview-img">
+    <h3 id="previewTitle">Diseño de referencia</h3>
+    <p class="modal-sub" id="previewCategory"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-primary" id="quoteThisBtn">Cotizar este estilo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WHATSAPP_PHONE = "5217228970604";
+
+const orderState = {
+  product: "Playera",
+  ideaType: "Idea desde cero",
+  quantity: "1 pieza",
+  reference: ""
+};
+
+function setupChipGroup(containerId, stateKey) {
+  const container = document.getElementById(containerId);
+  container.addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    container.querySelectorAll(".chip").forEach((c) => c.classList.remove("is-selected"));
+    chip.classList.add("is-selected");
+    orderState[stateKey] = chip.dataset.value;
+  });
+}
+
+function selectChipByValue(containerId, value, stateKey) {
+  const container = document.getElementById(containerId);
+  const chips = Array.from(container.querySelectorAll(".chip"));
+  const match = chips.find((c) => c.dataset.value === value);
+  if (match) {
+    chips.forEach((c) => c.classList.remove("is-selected"));
+    match.classList.add("is-selected");
+    orderState[stateKey] = value;
+  }
+}
+
+setupChipGroup("productChips", "product");
+setupChipGroup("ideaChips", "ideaType");
+setupChipGroup("qtyChips", "quantity");
+
+function openOrderModal(prefill = {}) {
+  if (prefill.product) selectChipByValue("productChips", prefill.product, "product");
+  if (prefill.ideaType) selectChipByValue("ideaChips", prefill.ideaType, "ideaType");
+  if (prefill.quantity) selectChipByValue("qtyChips", prefill.quantity, "quantity");
+  orderState.reference = prefill.reference || "";
+
+  const notesInput = document.getElementById("extraNotes");
+  if (prefill.notes) {
+    notesInput.value = prefill.notes;
+  }
+
+  const modal = document.getElementById("orderModal");
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeOrderModal() {
+  const modal = document.getElementById("orderModal");
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function sendOrderToWhatsApp() {
+  const dateVal = document.getElementById("targetDate").value.trim() || "Por definir";
+  const notesVal = document.getElementById("extraNotes").value.trim();
+
+  const lines = [
+    "(sitio web) Hola, me gustaría cotizar / hacer un pedido:",
+    `• Producto: ${orderState.product}`,
+    `• Tipo de solicitud: ${orderState.ideaType}`,
+    `• Cantidad: ${orderState.quantity}`,
+    `• Fecha deseada: ${dateVal}`
+  ];
+
+  if (orderState.reference) {
+    lines.push(`• Referencia de galería: ${orderState.reference}`);
+  }
+  if (notesVal) {
+    lines.push(`• Detalles: ${notesVal}`);
+  }
+
+  const url = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(lines.join("\n"))}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+  closeOrderModal();
+}
+
+/* VISTA PREVIA DE GALERÍA */
+const previewModal = document.getElementById("previewModal");
+const previewImg = document.getElementById("previewImg");
+const previewTitle = document.getElementById("previewTitle");
+const previewCategory = document.getElementById("previewCategory");
+const quoteThisBtn = document.getElementById("quoteThisBtn");
+
+let activeGalleryItem = null;
+
+document.querySelectorAll(".gallery .item img").forEach((img) => {
+  img.addEventListener("click", () => {
+    const ref = img.dataset.ref || img.alt || "Diseño de galería";
+    const cat = img.dataset.category || "Galería";
+
+    activeGalleryItem = { ref, cat };
+    previewImg.src = img.src;
+    previewImg.alt = ref;
+    previewTitle.textContent = ref;
+    previewCategory.textContent = `Categoría: ${cat}`;
+
+    previewModal.classList.add("is-open");
+    previewModal.setAttribute("aria-hidden", "false");
+  });
+});
+
+function closePreviewModal() {
+  previewModal.classList.remove("is-open");
+  previewModal.setAttribute("aria-hidden", "true");
+}
+
+quoteThisBtn.addEventListener("click", () => {
+  const itemData = activeGalleryItem;
+  closePreviewModal();
+
+  let guessedProduct = "Por definir";
+  const lowerRef = (itemData?.ref || "").toLowerCase();
+  if (lowerRef.includes("sudadera")) guessedProduct = "Sudadera";
+  else if (lowerRef.includes("playera")) guessedProduct = "Playera";
+  else if (lowerRef.includes("taza") || lowerRef.includes("vaso")) guessedProduct = "Taza / Vaso";
+  else if (lowerRef.includes("kit")) guessedProduct = "Kit / Accesorio";
+
+  openOrderModal({
+    product: guessedProduct,
+    ideaType: "Inspirado en la galería",
+    reference: itemData?.ref || "",
+    notes: itemData ? `Me gustaría algo similar a "${itemData.ref}".` : ""
+  });
+});
+
+/* CERRAR MODALES CON ESCAPE O CLIC FUERA */
+document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) {
+      backdrop.classList.remove("is-open");
+      backdrop.setAttribute("aria-hidden", "true");
+    }
+  });
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeOrderModal();
+    closePreviewModal();
+  }
+});
+</script>
+
+</body>
+</html>
