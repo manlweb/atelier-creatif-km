@@ -543,7 +543,8 @@ footer {
         <div class="item"><img src="Acc19.jpeg" alt="Accesorios Personalizados - Acc19" data-product="Accesorios Personalizados " data-ref="Accesorios Personalizados - Acc19"></div>
         <div class="item"><img src="Acc20.jpeg" alt="Accesorios Personalizados - Acc20" data-product="Accesorios Personalizados " data-ref="Accesorios Personalizados - Acc20"></div>
         <div class="item"><img src="Acc21.jpeg" alt="Accesorios Personalizados - Acc21" data-product="Accesorios Personalizados " data-ref="Accesorios Personalizados - Acc20"></div>
-    
+        <div class="item"><img src="Acc21.jpeg" alt="Accesorios Personalizados - Acc21" data-product="Accesorios Personalizados" data-ref="Accesorios Personalizados - Acc21"></div>
+
     </div>
 
     <button type="button" class="btn" data-open-order data-idea="Inspirado en la galería">
@@ -556,17 +557,15 @@ footer {
     <h2>Proceso</h2>
 
     <div class="steps">
-
         <button type="button" class="step" data-open-order data-idea="Idea desde cero">
             <h3>1. Envíanos tu idea</h3>
             <p>Cuéntanos el diseño que buscas o compártenos el tuyo, producto, cantidad y fecha de entrega.</p>
         </button>
 
-        <button type="button" class="step" data-open-order data-idea="Quiero propuesta de diseño">
+        <button type="button" class="step" data-open-order data-idea="Idea desde cero">
             <h3>2. Creamos tu diseño</h3>
             <p>Desarrollamos una propuesta personalizada acorde a tu idea.</p>
         </button>
-
         <a class="step" href="https://api.whatsapp.com/send?phone=5217228970604&text=(sitio%20web)%20Hola%2C%20quiero%20aprobar%20un%20dise%C3%B1o">
             <h3>3. Apruebas</h3>
             <p>Te mostramos el diseño final para tu confirmación.</p>
@@ -589,7 +588,6 @@ footer {
     <a href="https://linktr.ee/ateliercreatifkm" class="btn">Más enlaces</a>
 
 </section>
-
 <footer>
     © 2026 Atelier Creatif KM
 </footer>
@@ -675,7 +673,6 @@ footer {
     </div>
   </div>
 </div>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   var WHATSAPP_PHONE = "5217228970604";
@@ -700,7 +697,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function buildSummaryLines() {
     var dateVal = (targetDateInput.value || "").trim() || "Por definir";
     var notesVal = (extraNotesInput.value || "").trim();
-
     var lines = [
       "(sitio web) Hola, me gustaría cotizar / hacer un pedido:",
       "- Producto: " + orderState.product,
@@ -742,7 +738,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateContactLinks() {
     var lines = buildSummaryLines();
     var bodyText = lines.join("\n");
-
     sendWhatsAppLink.href =
       "https://api.whatsapp.com/send?phone=" +
       WHATSAPP_PHONE +
@@ -828,19 +823,53 @@ document.addEventListener("DOMContentLoaded", function () {
   setupChipGroup("qtyChips", "quantity");
 
   targetDateInput.addEventListener("input", updateContactLinks);
-  extraNotesInput.addEventListener("input", updateContactLinks);
-
-  function openOrderModal(prefill) {
+  extraNotesInput.addEventListener("input", updateContactLinks);  function openOrderModal(prefill) {
     var data = prefill || {};
-    if (data.product) selectChipByValue("productChips", data.product, "product");
-    if (data.ideaType) selectChipByValue("ideaChips", data.ideaType, "ideaType");
-    if (data.quantity) selectChipByValue("qtyChips", data.quantity, "quantity");
+
+    // Restablecer los valores predeterminados
+    orderState.product = "Sudaderas";
+    orderState.ideaType = "Idea desde cero";
+    orderState.quantity = "1 pieza";
+    orderState.reference = "";
+
+    // Restablecer las selecciones
+    selectChipByValue("productChips", "Sudaderas", "product");
+    selectChipByValue("ideaChips", "Idea desde cero", "ideaType");
+    selectChipByValue("qtyChips", "1 pieza", "quantity");
+
+    // Limpiar los campos de solicitudes anteriores
+    targetDateInput.value = "";
+    extraNotesInput.value = "";
+    emailFallbackText.value = "";
+    emailCopyBox.classList.remove("is-visible");
+
+    // Aplicar los datos de la nueva solicitud
+    if (data.product) {
+      var selectedProduct = data.product;
+
+      if (selectedProduct.indexOf("Accesorios Personalizados") === 0) {
+        selectedProduct = "Accesorios Personalizados (Llaveros, Tote Bags, Vasos y más)";
+      }
+
+      selectChipByValue("productChips", selectedProduct, "product");
+    }
+
+    if (data.ideaType) {
+      selectChipByValue("ideaChips", data.ideaType, "ideaType");
+    }
+
+    if (data.quantity) {
+      selectChipByValue("qtyChips", data.quantity, "quantity");
+    }
+
     orderState.reference = data.reference || "";
+
     if (typeof data.notes === "string") {
       extraNotesInput.value = data.notes;
     }
-    emailCopyBox.classList.remove("is-visible");
+
     updateContactLinks();
+
     orderModal.classList.add("is-open");
     orderModal.setAttribute("aria-hidden", "false");
   }
@@ -893,9 +922,7 @@ document.addEventListener("DOMContentLoaded", function () {
       previewModal.classList.add("is-open");
       previewModal.setAttribute("aria-hidden", "false");
     });
-  });
-
-  function closePreviewModal() {
+  });  function closePreviewModal() {
     previewModal.classList.remove("is-open");
     previewModal.setAttribute("aria-hidden", "true");
   }
@@ -936,3 +963,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+ 
